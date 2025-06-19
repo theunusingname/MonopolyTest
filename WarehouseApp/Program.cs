@@ -66,8 +66,6 @@ class Program
         Console.WriteLine("______________________");
         Console.WriteLine("\nTop 3 by expire date");
         ShowPallets(top);
-
-        var j = 4;
     }
 
     private static void ShowPallets(IEnumerable<Pallete> palletes)
