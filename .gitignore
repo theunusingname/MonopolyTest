@@ -1,0 +1,8 @@
+.vs
+obj
+bin
+.DS_Store
+build.log
+.vscode
+*.code-workspace
+*.log
