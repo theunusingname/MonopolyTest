@@ -2,6 +2,8 @@
 
 public class Box : StorageUnit, IExpirable
 {
+    public const int DefaultExpireDays = 100;
+    
     private readonly DateOnly _expireDate;
     
     private Box(decimal width, decimal length, decimal height, decimal weight, DateOnly expireDate) : 
@@ -62,7 +64,7 @@ public class Box : StorageUnit, IExpirable
         {
             if (_isManufacturedSpecified)
             {
-                return new Box(_width, _length, _height, _weight, _date.AddDays(100));
+                return new Box(_width, _length, _height, _weight, _date.AddDays(DefaultExpireDays));
             }
             return new Box(_width, _length, _height, _weight, _date);
 
