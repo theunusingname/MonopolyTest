@@ -69,8 +69,10 @@ public class Warehouse(IWarehouseRepo repo)
     public List<Pallete> GetTop3ByExpireDate()
     {
         return repo.LoadAllPallets()
+            .Where(pallete => pallete.GetBoxes().Count > 0)
             .OrderByDescending(pallete => pallete.GetBoxes().Max(box => box.GetExpireDate()))
-            .ThenBy(pallete => pallete.GetVolume())
-            .Take(3).ToList();
+            .Take(3)
+            .OrderBy(pallete => pallete.GetVolume())
+            .ToList();
     }
 }

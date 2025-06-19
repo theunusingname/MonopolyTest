@@ -27,7 +27,7 @@ public class Pallete(decimal width, decimal length, decimal height)
 
     public override decimal GetVolume()
     {
-        return _content.Select(box => box.Weight).Sum() + LongSide * ShortSide * Height;
+        return _content.Sum(box => box.GetVolume()) + LongSide * ShortSide * Height;
     }
 
     public IReadOnlyList<Box> GetBoxes()

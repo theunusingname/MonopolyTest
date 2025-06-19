@@ -8,15 +8,26 @@ class Program
     {
         decimal[,] testPallets =
         {
-            { 1, 2, 3 },
-            { 3, 6, 7 },
-            { 3.5m, 5.6m, 2.6m }
+            { 5, 5, 0.2m },
+            { 3, 6, 0.2m },
+            { 3.5m, 5.6m, 0.2m },
+            { 3, 5, 0.2m },
+            { 3, 6, 0.2m }
         };
 
         decimal[,] testBoxes =
         {
             { 1, 1, 4, 1 },
             { 2, 2, 2, 3 },
+            { 3, 3, 3, 2 },
+            { 1, 2, 2, 5 },
+            { 2, 1, 2, 3 },
+            { 3, 3, 3, 2 },
+            { 1, 1, 4, 1 },
+            { 2, 2, 2, 3 },
+            { 3, 3, 3, 2 },
+            { 1, 2, 2, 5 },
+            { 2, 1, 2, 3 },
             { 3, 3, 3, 2 },
         };
 
@@ -30,18 +41,21 @@ class Program
 
         for (var i = 0; i <= testBoxes.GetUpperBound(0); i++)
         {
-            boxIds.Add(warehouse.AddBoxWithExpireDate(testBoxes[i, 0], testBoxes[i, 1], testBoxes[i, 2], testBoxes[i, 3],
-                DateOnly.FromDateTime(DateTime.Now + TimeSpan.FromDays(i)), palleteIds[i % palleteIds.Count]));
+            boxIds.Add(warehouse.AddBoxWithExpireDate(testBoxes[i, 0], testBoxes[i, 1], testBoxes[i, 2],
+                testBoxes[i, 3],
+                DateOnly.FromDateTime(DateTime.Now + TimeSpan.FromDays(i/2)), palleteIds[i % palleteIds.Count]));
         }
 
         for (var i = 0; i <= testBoxes.GetUpperBound(0); i++)
         {
-            boxIds.Add(warehouse.AddBoxWithManufacturedDate(testBoxes[i, 0], testBoxes[i, 1], testBoxes[i, 2], testBoxes[i, 3],
-                DateOnly.FromDateTime(DateTime.Now + TimeSpan.FromDays(i)), palleteIds[i % palleteIds.Count]));
+            boxIds.Add(warehouse.AddBoxWithManufacturedDate(testBoxes[i, 0], testBoxes[i, 1], testBoxes[i, 2],
+                testBoxes[i, 3],
+                DateOnly.FromDateTime(DateTime.Now + TimeSpan.FromDays(i/2)), palleteIds[i % palleteIds.Count]));
         }
+
         Console.WriteLine("Grouped pallets");
         var grouped = warehouse.GetGroupedPallets();
-        
+
         foreach (var keyValuePair in grouped)
         {
             Console.WriteLine($"\nDate:{keyValuePair.Key}");
@@ -52,7 +66,7 @@ class Program
         Console.WriteLine("______________________");
         Console.WriteLine("\nTop 3 by expire date");
         ShowPallets(top);
-        
+
         var j = 4;
     }
 
